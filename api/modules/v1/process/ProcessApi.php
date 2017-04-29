@@ -76,9 +76,16 @@ class ProcessApi
         $model->user_id = $product->user_id;
         /*echo "<pre>";
         print_r($model);die;*/
-        $model->save();
+        if($model->save())
+        {
+           return $model->product_id;
+        }
+        else
+            return $model->getErrors();
+
+        
     }
-    public static function saveProductDetail($params)
+    public static function saveProductDetail($params,$id_product_detail)
     {
         $productdetail = $params->products_detail;
         for($i = 0; $i< count($productdetail); $i++ )
@@ -90,7 +97,7 @@ class ProcessApi
             $model->pd_trade_price = $productdetail[$i]->pd_trade_price;
             $model->pd_trade_price_tax = $productdetail[$i]->pd_trade_price_tax;
             $model->pd_sales_price = $productdetail[$i]->pd_sales_price;
-            $model->product_id = $productdetail[$i]->product_id;
+            $model->product_id = $id_product_detail;
             $model->product_detail = $productdetail[$i]->product_detail;
             $model->pd_trade_direct_price = $productdetail[$i]->pd_trade_direct_price;
             $model->save_amazon = $productdetail[$i]->save_amazon;
@@ -116,8 +123,9 @@ class ProcessApi
         //end get data here
         //$prd_detail_extend $str_ext_detail $title $description
         //Gia lap
-        ProcessApi::saveProduct($params);
-        ProcessApi::saveProductDetail($params);
+        $id_product_detail = ProcessApi::saveProduct($params);
+        
+        ProcessApi::saveProductDetail($params,$id_product_detail);
         $prd_detail_id = 8807;
         $row = ProductDetailsExt::find()->where(['prd_detail_id' => $prd_detail_id])->asArray()->one();
         $_POST['rd_prod_detail'] = 1;
