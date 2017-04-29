@@ -1,0 +1,68 @@
+# yii console command
+/yii
+
+# phpstorm project files
+.idea
+
+# netbeans project files
+nbproject
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+composer.phar
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+/backend/runtime/debug/561772504049b.data
+/backend/runtime/debug/56177258b8091.data
+/backend/runtime/debug/5617726243782.data
+/backend/runtime/debug/561772a16d5df.data
+/backend/runtime/debug/56177320826dc.data
+/backend/runtime/debug/5617733c21a57.data
+/backend/runtime/debug/561773402f9e7.data
+/backend/runtime/debug/561773404b73d.data
+/backend/runtime/debug/561773419c869.data
+/backend/runtime/debug/56177444c3ca1.data
+/backend/runtime/debug/5617744603e96.data
+/uploads/diamon/clarity/hot-girl-thai-lan-1238800.jpg
+/uploads/diamon/clarity/images-1.jpg
+/uploads/diamon/clarity/newsside.jpg
+/uploads/diamon/clarity/slide3.jpg
+/uploads/diamon/color/hot-girl-thai-lan-1238800.jpg
+/uploads/diamon/color/newsside.jpg
+/uploads/diamon/color/slide3.jpg
+/uploads/diamon/cut/newsside.jpg
+/uploads/diamon/cut/slide3.jpg
+/uploads/prod/2/bigimage/hot-girl-thai-lan-1238800.jpg
+/uploads/prod/2/diamondimage/images-1.jpg
+/uploads/prod/2/extrastoneimage/slide1.jpg
+/uploads/prod/2/extrastoneimage/slide2.jpg
+/uploads/prod/2/thumbimage/hotgirl14.jpeg
+/uploads/prod/2/tryimage/nhung-hot-girl-ban-hang-online-noi-tieng-vi-sanh-dieu-va-xinh-ngat-ngay-p2.jpg
+/uploads/prodcat/4/1/hotgirl14.jpeg
+/uploads/prodcat/4/2/hot-girl-thai-lan-1238800.jpg
+/uploads/prodcat/4/3/images-1.jpg
+/uploads/prodcat/4/4/slide3.jpg
+/uploads/prodcat/4/5/newsside.jpg
+/uploads/prodcat/6/1/hot-girl-thai-lan-1238800.jpg
+/uploads/prodcat/6/2/nhung-hot-girl-ban-hang-online-noi-tieng-vi-sanh-dieu-va-xinh-ngat-ngay-p2.jpg
+/uploads/prodcat/6/3/slide1.jpg
+/uploads/prodcat/6/4/slide2.jpg
+/uploads/prodcat/6/5/slide3.jpg
+/backend/web/assets
+/api/runtime
