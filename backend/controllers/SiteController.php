@@ -7,6 +7,7 @@ use yii\web\Controller;
 use common\models\LoginForm;
 use yii\filters\VerbFilter;
 use common\models\UserExt;
+use common\components\CRestFull;
 /**
  * Site controller
  */
@@ -55,6 +56,18 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+       $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, 'http://www.vnpost.vn/vi-vn/dinh-vi/buu-pham?key=Ei533877620VN');
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);       
+
+    $data = curl_exec($ch);
+    curl_close($ch);
+
+    print_r($data); die;
         /*$postdata = [
             'param1' => 'value1',
             'param2' => 'value2'
@@ -66,6 +79,11 @@ class SiteController extends Controller
         ];
         $api = \common\components\CRestFull::post('http://root.test/eccubeapi/api/web/v1/customer/transferproduct',$params,'bantraicay' , 'XfaoH-LlXJcyBunJpQLSqJqhwQmsuJfn')->getResponse();
         print_r($api);die;*/
+        $api = file_get_contents('http://www.vnpost.vn/vi-vn/dinh-vi/buu-pham?key=Ei533877620VN');
+        //$api = \common\components\CRestFull::get('http://www.vnpost.vn/vi-vn/dinh-vi/buu-pham?key=Ei533877620VN',[])->getResponse();
+        //$api = file_get_contents('http://www.vnpost.vn/vi-vn/dinh-vi/buu-pham?key=Ei533877620VN');
+        //$api = \common\components\CRestFull::get('http://www.vnpost.vn/vi-vn/dinh-vi/buu-pham?key=Ei533877620VN')->getResponse();
+        print_r($api);die;
         $totaluser = UserExt::find()->count();
         return $this->render('index',[
             'totaluser' => $totaluser,

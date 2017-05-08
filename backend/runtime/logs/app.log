@@ -1,0 +1,460 @@
+2017-05-04 15:16:29 [127.0.0.1][1][-][error][yii\base\InvalidConfigException] exception 'yii\base\InvalidConfigException' with message 'The directory does not exist: D:/SoftWorld/tracuunhanh/backend/web/assets' in D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\AssetManager.php:211
+Stack trace:
+#0 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\di\Container.php(366): ReflectionClass->newInstanceArgs(Array)
+#3 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\di\Container.php(151): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\di\ServiceLocator.php(133): yii\BaseYii::createObject(Array)
+#6 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Application.php(600): yii\di\ServiceLocator->get('assetManager')
+#7 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\View.php(223): yii\base\Application->getAssetManager()
+#8 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\View.php(283): yii\web\View->getAssetManager()
+#9 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\AssetBundle.php(119): yii\web\View->registerAssetBundle('backend\\assets\\...')
+#10 D:\SoftWorld\tracuunhanh\vendor\dmstr\yii2-adminlte-asset\example-views\yiisoft\yii2-app\layouts\main.php(20): yii\web\AssetBundle::register(Object(yii\web\View))
+#11 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\View.php(325): require('D:\\SoftWorld\\tr...')
+#12 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\View.php(247): yii\base\View->renderPhpFile('D:\\SoftWorld\\tr...', Array)
+#13 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Controller.php(386): yii\base\View->renderFile('D:\\SoftWorld\\tr...', Array, Object(backend\controllers\SiteController))
+#14 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Controller.php(372): yii\base\Controller->renderContent('<style>\r\n    /*...')
+#15 D:\SoftWorld\tracuunhanh\backend\controllers\SiteController.php(72): yii\base\Controller->render('index', Array)
+#16 [internal function]: backend\controllers\SiteController->actionIndex()
+#17 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#18 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#19 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('', Array)
+#20 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('', Array)
+#21 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 D:\SoftWorld\tracuunhanh\backend\web\index.php(18): yii\base\Application->run()
+#23 {main}
+2017-05-04 15:16:29 [127.0.0.1][1][-][info][application] $_COOKIE = [
+    '_identity' => '1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[1,\"0khfUGhm43jHFGy7RN-CZGdjIXYUngQf\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'MIBDIRS' => '/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => '/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'root.test'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2'
+    'HTTP_COOKIE' => '_identity=1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%220khfUGhm43jHFGy7RN-CZGdjIXYUngQf%22%2C2592000%5D%22%3B%7D'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\TortoiseGit\\bin;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;%USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14 Server at root.test Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14'
+    'SERVER_NAME' => 'root.test'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'D:/SoftWorld/tracuunhanh/backend/web/index.php'
+    'REMOTE_PORT' => '50954'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/tracuunhanh/backend/web/'
+    'SCRIPT_NAME' => '/tracuunhanh/backend/web/index.php'
+    'PHP_SELF' => '/tracuunhanh/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1493903789.269
+    'REQUEST_TIME' => 1493903789
+]
+2017-05-04 15:16:29 [127.0.0.1][1][nt5qbim8jh7f3on6ur08n70560][warning][yii\log\Dispatcher::dispatch] Unable to send log via yii\debug\LogTarget: Exception (Invalid Configuration) 'yii\base\InvalidConfigException' with message 'The directory does not exist: D:/SoftWorld/tracuunhanh/backend/web/assets' 
+
+in D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\AssetManager.php:211
+
+Stack trace:
+#0 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Object.php(107): yii\web\AssetManager->init()
+#1 [internal function]: yii\base\Object->__construct(Array)
+#2 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\di\Container.php(366): ReflectionClass->newInstanceArgs(Array)
+#3 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\di\Container.php(151): yii\di\Container->build('yii\\web\\AssetMa...', Array, Array)
+#4 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\BaseYii.php(344): yii\di\Container->get('yii\\web\\AssetMa...', Array, Array)
+#5 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\di\ServiceLocator.php(133): yii\BaseYii::createObject(Array)
+#6 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Application.php(600): yii\di\ServiceLocator->get('assetManager')
+#7 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\View.php(223): yii\base\Application->getAssetManager()
+#8 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Component.php(130): yii\web\View->getAssetManager()
+#9 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2-debug\panels\AssetPanel.php(53): yii\base\Component->__get('assetManager')
+#10 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2-debug\LogTarget.php(55): yii\debug\panels\AssetPanel->save()
+#11 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2-debug\LogTarget.php(112): yii\debug\LogTarget->export()
+#12 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\log\Dispatcher.php(183): yii\debug\LogTarget->collect(Array, true)
+#13 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\log\Logger.php(173): yii\log\Dispatcher->dispatch(Array, true)
+#14 [internal function]: yii\log\Logger->flush(true)
+#15 {main}
+2017-05-04 15:16:29 [127.0.0.1][1][nt5qbim8jh7f3on6ur08n70560][info][application] $_COOKIE = [
+    '_identity' => '1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[1,\"0khfUGhm43jHFGy7RN-CZGdjIXYUngQf\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'MIBDIRS' => '/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => '/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'root.test'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2'
+    'HTTP_COOKIE' => '_identity=1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%220khfUGhm43jHFGy7RN-CZGdjIXYUngQf%22%2C2592000%5D%22%3B%7D'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\TortoiseGit\\bin;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;%USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14 Server at root.test Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14'
+    'SERVER_NAME' => 'root.test'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'D:/SoftWorld/tracuunhanh/backend/web/index.php'
+    'REMOTE_PORT' => '50954'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/tracuunhanh/backend/web/'
+    'SCRIPT_NAME' => '/tracuunhanh/backend/web/index.php'
+    'PHP_SELF' => '/tracuunhanh/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1493903789.269
+    'REQUEST_TIME' => 1493903789
+]
+2017-05-04 15:16:59 [127.0.0.1][1][nt5qbim8jh7f3on6ur08n70560][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "css/ionicons.min.css".' in D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('css/ionicons.mi...', Array)
+#1 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 D:\SoftWorld\tracuunhanh\backend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Không tìm thấy trang.' in D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\Application.php:96
+Stack trace:
+#0 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 D:\SoftWorld\tracuunhanh\backend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2017-05-04 15:16:59 [127.0.0.1][1][nt5qbim8jh7f3on6ur08n70560][info][application] $_GET = [
+    'r' => 'css/ionicons.min.css'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'nt5qbim8jh7f3on6ur08n70560'
+    '_identity' => '1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[1,\"0khfUGhm43jHFGy7RN-CZGdjIXYUngQf\",2592000]\";}'
+    '_csrf' => '7b8a4647de6a4fa4417a942f4cfac8d3a65d9e26f76a98c89ef10b3c53f9381fa:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"2YuZ-DMYe7xeQzl6ME6ZL43cpAE8eh6w\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => '/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => '/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => '/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => '/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'root.test'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/css,*/*;q=0.1'
+    'HTTP_REFERER' => 'http://root.test/tracuunhanh/backend/web/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2'
+    'HTTP_COOKIE' => 'PHPSESSID=nt5qbim8jh7f3on6ur08n70560; _identity=1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%220khfUGhm43jHFGy7RN-CZGdjIXYUngQf%22%2C2592000%5D%22%3B%7D; _csrf=7b8a4647de6a4fa4417a942f4cfac8d3a65d9e26f76a98c89ef10b3c53f9381fa%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%222YuZ-DMYe7xeQzl6ME6ZL43cpAE8eh6w%22%3B%7D'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\TortoiseGit\\bin;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;%USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14 Server at root.test Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14'
+    'SERVER_NAME' => 'root.test'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'D:/SoftWorld/tracuunhanh/backend/web/index.php'
+    'REMOTE_PORT' => '51036'
+    'REDIRECT_QUERY_STRING' => 'r=css/ionicons.min.css'
+    'REDIRECT_URL' => 'http://root.test/tracuunhanh/backend/web/css/ionicons.min.css'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=css/ionicons.min.css'
+    'REQUEST_URI' => '/tracuunhanh/backend/web/css/ionicons.min.css'
+    'SCRIPT_NAME' => '/tracuunhanh/backend/web/index.php'
+    'PHP_SELF' => '/tracuunhanh/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1493903819.229
+    'REQUEST_TIME' => 1493903819
+]
+2017-05-04 15:35:14 [127.0.0.1][1][nt5qbim8jh7f3on6ur08n70560][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "css/ionicons.min.css".' in D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('css/ionicons.mi...', Array)
+#1 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 D:\SoftWorld\tracuunhanh\backend\web\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Không tìm thấy trang.' in D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\Application.php:96
+Stack trace:
+#0 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 D:\SoftWorld\tracuunhanh\backend\web\index.php(18): yii\base\Application->run()
+#2 {main}
+2017-05-04 15:35:13 [127.0.0.1][1][nt5qbim8jh7f3on6ur08n70560][info][application] $_GET = [
+    'r' => 'css/ionicons.min.css'
+]
+
+$_COOKIE = [
+    'PHPSESSID' => 'nt5qbim8jh7f3on6ur08n70560'
+    '_csrf' => '7b8a4647de6a4fa4417a942f4cfac8d3a65d9e26f76a98c89ef10b3c53f9381fa:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"2YuZ-DMYe7xeQzl6ME6ZL43cpAE8eh6w\";}'
+    '_identity' => '1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[1,\"0khfUGhm43jHFGy7RN-CZGdjIXYUngQf\",2592000]\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => '/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => '/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => '/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => '/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'root.test'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/css,*/*;q=0.1'
+    'HTTP_REFERER' => 'http://root.test/tracuunhanh/backend/web/'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2'
+    'HTTP_COOKIE' => 'PHPSESSID=nt5qbim8jh7f3on6ur08n70560; _csrf=7b8a4647de6a4fa4417a942f4cfac8d3a65d9e26f76a98c89ef10b3c53f9381fa%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%222YuZ-DMYe7xeQzl6ME6ZL43cpAE8eh6w%22%3B%7D; _identity=1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%220khfUGhm43jHFGy7RN-CZGdjIXYUngQf%22%2C2592000%5D%22%3B%7D'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\TortoiseGit\\bin;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;%USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14 Server at root.test Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14'
+    'SERVER_NAME' => 'root.test'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'D:/SoftWorld/tracuunhanh/backend/web/index.php'
+    'REMOTE_PORT' => '51284'
+    'REDIRECT_QUERY_STRING' => 'r=css/ionicons.min.css'
+    'REDIRECT_URL' => 'http://root.test/tracuunhanh/backend/web/css/ionicons.min.css'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => 'r=css/ionicons.min.css'
+    'REQUEST_URI' => '/tracuunhanh/backend/web/css/ionicons.min.css'
+    'SCRIPT_NAME' => '/tracuunhanh/backend/web/index.php'
+    'PHP_SELF' => '/tracuunhanh/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1493904913.861
+    'REQUEST_TIME' => 1493904913
+]
+2017-05-04 16:11:27 [127.0.0.1][1][di4runa7bq1dkph657uo1vqna5][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined variable: url' in D:\SoftWorld\tracuunhanh\backend\controllers\SiteController.php:61
+Stack trace:
+#0 D:\SoftWorld\tracuunhanh\backend\controllers\SiteController.php(61): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'D:\\SoftWorld\\tr...', 61, Array)
+#1 [internal function]: backend\controllers\SiteController->actionIndex()
+#2 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#3 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#4 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('', Array)
+#5 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('', Array)
+#6 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 D:\SoftWorld\tracuunhanh\backend\web\index.php(18): yii\base\Application->run()
+#8 {main}
+2017-05-04 16:11:27 [127.0.0.1][1][di4runa7bq1dkph657uo1vqna5][info][application] $_COOKIE = [
+    '_csrf' => '95fb4ac4ce108d270757ab6c91f414090f845db55ad6159e578bc79794da0e23a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"FAPgv-YONZ3H404TSz2oV1L3mvQWqG2d\";}'
+    '_identity' => '1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[1,\"0khfUGhm43jHFGy7RN-CZGdjIXYUngQf\",2592000]\";}'
+    '__utma' => '43098278.28869589.1493905677.1493905677.1493905677.1'
+    '__utmb' => '43098278.12.10.1493905677'
+    '__utmc' => '43098278'
+    '__utmz' => '43098278.1493905677.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)'
+    'PHPSESSID' => 'di4runa7bq1dkph657uo1vqna5'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/tracuunhanh/backend/web/index.php'
+    '__id' => 1
+]
+
+$_SERVER = [
+    'MIBDIRS' => '/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => '/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'root.test'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://root.test/tracuunhanh/backend/web/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2'
+    'HTTP_COOKIE' => '_csrf=95fb4ac4ce108d270757ab6c91f414090f845db55ad6159e578bc79794da0e23a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22FAPgv-YONZ3H404TSz2oV1L3mvQWqG2d%22%3B%7D; _identity=1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%220khfUGhm43jHFGy7RN-CZGdjIXYUngQf%22%2C2592000%5D%22%3B%7D; __utma=43098278.28869589.1493905677.1493905677.1493905677.1; __utmb=43098278.12.10.1493905677; __utmc=43098278; __utmz=43098278.1493905677.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); PHPSESSID=di4runa7bq1dkph657uo1vqna5'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\TortoiseGit\\bin;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;%USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14 Server at root.test Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14'
+    'SERVER_NAME' => 'root.test'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'D:/SoftWorld/tracuunhanh/backend/web/index.php'
+    'REMOTE_PORT' => '53658'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/tracuunhanh/backend/web/index.php'
+    'SCRIPT_NAME' => '/tracuunhanh/backend/web/index.php'
+    'PHP_SELF' => '/tracuunhanh/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1493907087.342
+    'REQUEST_TIME' => 1493907087
+]
+2017-05-04 16:14:33 [127.0.0.1][1][di4runa7bq1dkph657uo1vqna5][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined variable: url' in D:\SoftWorld\tracuunhanh\backend\controllers\SiteController.php:64
+Stack trace:
+#0 D:\SoftWorld\tracuunhanh\backend\controllers\SiteController.php(64): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'D:\\SoftWorld\\tr...', 64, Array)
+#1 [internal function]: backend\controllers\SiteController->actionIndex()
+#2 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#3 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#4 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('', Array)
+#5 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\web\Application.php(84): yii\base\Module->runAction('', Array)
+#6 D:\SoftWorld\tracuunhanh\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 D:\SoftWorld\tracuunhanh\backend\web\index.php(18): yii\base\Application->run()
+#8 {main}
+2017-05-04 16:14:32 [127.0.0.1][1][di4runa7bq1dkph657uo1vqna5][info][application] $_COOKIE = [
+    '_csrf' => '95fb4ac4ce108d270757ab6c91f414090f845db55ad6159e578bc79794da0e23a:2:{i:0;s:5:\"_csrf\";i:1;s:32:\"FAPgv-YONZ3H404TSz2oV1L3mvQWqG2d\";}'
+    '_identity' => '1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a:2:{i:0;s:9:\"_identity\";i:1;s:46:\"[1,\"0khfUGhm43jHFGy7RN-CZGdjIXYUngQf\",2592000]\";}'
+    'PHPSESSID' => 'di4runa7bq1dkph657uo1vqna5'
+    '__utmt' => '1'
+    '__utma' => '43098278.28869589.1493905677.1493905677.1493905677.1'
+    '__utmb' => '43098278.13.10.1493905677'
+    '__utmc' => '43098278'
+    '__utmz' => '43098278.1493905677.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/tracuunhanh/backend/web/index.php'
+    '__id' => 1
+]
+
+$_SERVER = [
+    'MIBDIRS' => '/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => '/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'root.test'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_REFERER' => 'http://root.test/tracuunhanh/backend/web/index.php?r=site%2Flogin'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2'
+    'HTTP_COOKIE' => '_csrf=95fb4ac4ce108d270757ab6c91f414090f845db55ad6159e578bc79794da0e23a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22FAPgv-YONZ3H404TSz2oV1L3mvQWqG2d%22%3B%7D; _identity=1a85cd901cd0e91bb56034bd1f86fc69ccf06194932ba4e43c2947a7d9a61631a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%220khfUGhm43jHFGy7RN-CZGdjIXYUngQf%22%2C2592000%5D%22%3B%7D; PHPSESSID=di4runa7bq1dkph657uo1vqna5; __utmt=1; __utma=43098278.28869589.1493905677.1493905677.1493905677.1; __utmb=43098278.13.10.1493905677; __utmc=43098278; __utmz=43098278.1493905677.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)'
+    'PATH' => 'C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;C:\\Program Files\\TortoiseGit\\bin;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files\\Intel\\WiFi\\bin\\;C:\\Program Files\\Common Files\\Intel\\WirelessCommon\\;%USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps;'
+    'SystemRoot' => 'C:\\WINDOWS'
+    'COMSPEC' => 'C:\\WINDOWS\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC'
+    'WINDIR' => 'C:\\WINDOWS'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14 Server at root.test Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.17 (Win32) OpenSSL/1.0.2d PHP/5.6.14'
+    'SERVER_NAME' => 'root.test'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'D:/SoftWorld'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'D:/SoftWorld/tracuunhanh/backend/web/index.php'
+    'REMOTE_PORT' => '54007'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/tracuunhanh/backend/web/index.php'
+    'SCRIPT_NAME' => '/tracuunhanh/backend/web/index.php'
+    'PHP_SELF' => '/tracuunhanh/backend/web/index.php'
+    'REQUEST_TIME_FLOAT' => 1493907272.959
+    'REQUEST_TIME' => 1493907272
+]
