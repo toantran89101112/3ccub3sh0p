@@ -14,5 +14,6 @@ return [
         'server_ftp' => 'upload.rakuten.ne.jp',
         'user_name' => 'nigaoe-komachi',
         'user_pass' => 'pQk4fe2S',
-    ]
+    ],
+    'path_upload'=> realpath(dirname(__FILE__).'/../../').'/uploads/'
 ];

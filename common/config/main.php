@@ -5,6 +5,9 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'htmldom'=> [
+        	'class'=>'frontend\components\HtmlDom'
+        ]
     ],
     'language' => 'vi-VI',
     'sourceLanguage' => 'vi-VI',
