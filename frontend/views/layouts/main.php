@@ -96,7 +96,7 @@ $asset = \frontend\assets\AppAsset::register($this);
         <!--<script>eval(mod_pagespeed_77Uf00M4b4);</script> -->
         <script>eval(mod_pagespeed_LDb0DTF80S);</script> 
  <?php
-       }else if(($link =='/frontend/web/site/signup') ||($link == '/site/signup')){        
+       }else if($controller == 'site' && $action == 'signup'){        
   ?>
    <canvas id="bubble-canvas" style="pointer-events: none; position: fixed; top: 0px; left: 0px; z-index: 1;" width="1304" height="286"></canvas>
     <!-- jQuery -->
