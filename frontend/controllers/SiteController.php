@@ -72,12 +72,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $htmldom = Yii::$app->htmldom;
-        $list_code = $htmldom->getCodeExcel('excel ga rung.xlsx');
-        $htmldom->getContent($list_code);
+     //   $htmldom = Yii::$app->htmldom;
+     //   $list_code = $htmldom->getCodeExcel('excel ga rung.xlsx');
+    //    $htmldom->getContent($list_code);
 
 
-        die;
+     //   die;
         return $this->render('index');
     }
 
@@ -88,6 +88,7 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -154,6 +155,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+      
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
@@ -162,10 +164,10 @@ class SiteController extends Controller
                 }
             }
         }
-
+    
         return $this->render('signup', [
-            'model' => $model,
-        ]);
+                'model' => $model,
+            ]);
     }
 
     /**
