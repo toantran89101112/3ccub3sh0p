@@ -11,7 +11,8 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 AppAsset::register($this);
-
+$controller = Yii::$app->controller->id;
+$action = Yii::$app->controller->action->id;
 $asset = \frontend\assets\AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -44,16 +45,11 @@ $asset = \frontend\assets\AppAsset::register($this);
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,700,700italic,800,800italic,300italic,300" rel="stylesheet">
         <?php
-           $actual_link = "$_SERVER[REQUEST_URI]";
-           $link =explode("?",$actual_link)[0];
-         //   echo   "<pre>"; print_r($link);       die;
-            ///index
-          //    
-          if(($link == '/')||($link == '/site/index')||($link == '/site')||($link == '/site/')||($link == '/frontend/web/') ){                   
+          if($controller == 'site' && $action == 'index'){                   
      ?>      
     <link href="<?= $asset->baseUrl ?>/template/Home/css/A.bootstrap.min.css%2bfont-awesome.min.css%2bmagnific-popup.css%2bowl.carousel.css%2bmain.css%2cMcc.xe-QRbrcBQ.css.pagespeed.cf.L7Hhsc5Z-Y.css" rel="stylesheet"/>
     <?php
-          }else if(($link =='/frontend/web/site/signup') ||($link == '/site/signup')){                     
+          }else if($controller == 'site' && $action == 'signup'){                     
      ?>   
      <link href="<?= $asset->baseUrl ?>/template/Login/css/fontawesome/css/font-awesome.min.css" rel="stylesheet"/>
      <link href="<?= $asset->baseUrl ?>/template/Login/css/style.css" rel="stylesheet"/>
@@ -82,7 +78,7 @@ $asset = \frontend\assets\AppAsset::register($this);
 
   
      <?php        
-             if(($link == '/')||($link == '/site/index')||($link == '/site')||($link == '/site/')||($link == '/frontend/web/') ){                    
+             if($controller == 'site' && $action == 'index'){                    
      ?>  
         <script src="<?= $asset->baseUrl ?>/template/Home/js/jquery-2.2.1.min.js.pagespeed.jm.QwDZyK_Lba.js"></script> 
         <script src="<?= $asset->baseUrl ?>/template/Home/js/bootstrap.min.js%2bjquery.magnific-popup.min.js%2bowl.carousel.min.js%2bjquery.waypoints.min.js%2bjquery.animateNumber.min.js.pagespeed.jc.3Eraoz6Fqj.js"></script><script>eval(mod_pagespeed_nsGvxPh_mc);</script> 
