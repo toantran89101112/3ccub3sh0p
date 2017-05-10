@@ -3,15 +3,17 @@
 /**
  * @package   yii2-builder
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   1.6.1
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
+ * @version   1.6.2
  */
 namespace kartik\builder;
 
 use yii\base\InvalidConfigException;
+use yii\base\Model;
+use kartik\form\ActiveForm;
 
 /**
- * Trait for all form builder widgets in this extension
+ * Trait for all methods used in all the form builder widgets in `yii2-builder` and initialized within [[BaseForm]].
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since  1.0
@@ -19,7 +21,7 @@ use yii\base\InvalidConfigException;
 trait FormTrait
 {
     /**
-     * Checks base config
+     * Checks base configuration and throws a configuration exception if invalid.
      *
      * @throws InvalidConfigException
      */
@@ -30,7 +32,7 @@ trait FormTrait
                 "The 'formName' property must be set when you are not using with ActiveForm."
             );
         }
-        if (!empty($this->form) && !$this->form instanceof \kartik\form\ActiveForm) {
+        if (!empty($this->form) && !$this->form instanceof ActiveForm) {
             throw new InvalidConfigException(
                 "The 'form' property must be an instance of '\\kartik\\widgets\\ActiveForm' or '\\kartik\\form\\ActiveForm'."
             );
@@ -41,7 +43,7 @@ trait FormTrait
     }
 
     /**
-     * Checks config for Form widgets
+     * Checks the form configuration and throws a configuration exception if invalid.
      *
      * @throws InvalidConfigException
      */
@@ -52,7 +54,7 @@ trait FormTrait
                 "Either the 'formName' has to be set or a valid 'model' property must be set extending from '\\yii\\base\\Model'."
             );
         }
-        if (empty($this->formName) && (empty($this->form) || !$this->form instanceof \kartik\form\ActiveForm)) {
+        if (empty($this->formName) && (empty($this->form) || !$this->form instanceof ActiveForm)) {
             throw new InvalidConfigException(
                 "The 'form' property must be set and must be an instance of '\\kartik\\form\\ActiveForm'."
             );
@@ -60,12 +62,12 @@ trait FormTrait
     }
 
     /**
-     * Check if a valid model is set for the object instance
+     * Check if a valid model is set for the object instance.
      *
-     * @return boolean
+     * @return boolean whether there is a valid model set.
      */
     protected function hasModel()
     {
-        return isset($this->model) && $this->model instanceof \yii\base\Model;
+        return isset($this->model) && $this->model instanceof Model;
     }
 }

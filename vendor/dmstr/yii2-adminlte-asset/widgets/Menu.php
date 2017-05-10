@@ -16,34 +16,81 @@ class Menu extends \yii\widgets\Menu
     public $linkTemplate = '<a href="{url}">{icon} {label}</a>';
     public $submenuTemplate = "\n<ul class='treeview-menu' {show}>\n{items}\n</ul>\n";
     public $activateParents = true;
+    public $defaultIconHtml = '<i class="fa fa-circle-o"></i> ';
+  
+    /**
+     * @var string
+     */
+    public static $iconClassPrefix = 'fa fa-';
+
+    private $noDefaultAction;
+    private $noDefaultRoute;
+    /**
+     * Renders the menu.
+     */
+    public function run()
+    {
+        if ($this->route === null && Yii::$app->controller !== null) {
+            $this->route = Yii::$app->controller->getRoute();
+        }
+        if ($this->params === null) {
+            $this->params = Yii::$app->request->getQueryParams();
+        }
+        $posDefaultAction = strpos($this->route, Yii::$app->controller->defaultAction);
+        if ($posDefaultAction) {
+            $this->noDefaultAction = rtrim(substr($this->route, 0, $posDefaultAction), '/');
+        } else {
+            $this->noDefaultAction = false;
+        }
+        $posDefaultRoute = strpos($this->route, Yii::$app->controller->module->defaultRoute);
+        if ($posDefaultRoute) {
+            $this->noDefaultRoute = rtrim(substr($this->route, 0, $posDefaultRoute), '/');
+        } else {
+            $this->noDefaultRoute = false;
+        }
+        $items = $this->normalizeItems($this->items, $hasActiveChild);
+        if (!empty($items)) {
+            $options = $this->options;
+            $tag = ArrayHelper::remove($options, 'tag', 'ul');
+
+            echo Html::tag($tag, $this->renderItems($items), $options);
+        }
+    }
+  
     /**
      * @inheritdoc
      */
     protected function renderItem($item)
     {
-        if(isset($item['items']))
-            $linkTemplate = '<a href="{url}">{icon} {label} <i class="fa fa-angle-left pull-right"></i></a>';
-        else
+        if(isset($item['items'])) {
+            $labelTemplate = '<a href="{url}">{icon} {label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+            $linkTemplate = '<a href="{url}">{icon} {label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+        }
+        else {
+            $labelTemplate = $this->labelTemplate;
             $linkTemplate = $this->linkTemplate;
+        }
+
         if (isset($item['url'])) {
             $template = ArrayHelper::getValue($item, 'template', $linkTemplate);
             $replace = !empty($item['icon']) ? [
                 '{url}' => Url::to($item['url']),
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => '<i class="' . $item['icon'] . '"></i> '
+                '{icon}' => '<i class="' . self::$iconClassPrefix . $item['icon'] . '"></i> '
             ] : [
                 '{url}' => Url::to($item['url']),
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => null,
+                '{icon}' => $this->defaultIconHtml,
             ];
             return strtr($template, $replace);
         } else {
-            $template = ArrayHelper::getValue($item, 'template', $this->labelTemplate);
+            $template = ArrayHelper::getValue($item, 'template', $labelTemplate);
             $replace = !empty($item['icon']) ? [
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => '<i class="' . $item['icon'] . '"></i> '
+                '{icon}' => '<i class="' . self::$iconClassPrefix . $item['icon'] . '"></i> '
             ] : [
                 '{label}' => '<span>'.$item['label'].'</span>',
+                '{icon}' => $this->defaultIconHtml
             ];
             return strtr($template, $replace);
         }
@@ -142,14 +189,10 @@ class Menu extends \yii\widgets\Menu
         if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
             $route = $item['url'][0];
             if ($route[0] !== '/' && Yii::$app->controller) {
-                $route = Yii::$app->controller->module->getUniqueId() . '/' . $route;
+                $route = ltrim(Yii::$app->controller->module->getUniqueId() . '/' . $route, '/');
             }
-            $arrayRoute = explode('/', ltrim($route, '/'));
-            $arrayThisRoute = explode('/', $this->route);
-            if ($arrayRoute[0] !== $arrayThisRoute[0]) {
-                return false;
-            }
-            if (isset($arrayRoute[1]) && $arrayRoute[1] !== $arrayThisRoute[1]) {
+            $route = ltrim($route,'/');
+            if ($route != $this->route && $route !== $this->noDefaultRoute && $route !== $this->noDefaultAction) {
                 return false;
             }
             unset($item['url']['#']);

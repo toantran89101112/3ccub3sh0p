@@ -2,126 +2,146 @@
 /**
  * @package   yii2-builder
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   1.6.1
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
+ * @version   1.6.2
  */
 
 namespace kartik\builder;
 
 use Yii;
 use yii\base\InvalidConfigException;
+use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use \Closure;
 use kartik\form\ActiveForm;
 
 /**
- * A form builder widget for rendering the form attributes using kartik\form\ActiveForm.
- * The widget uses Bootstrap 3.x styling for generating form styles and multiple field columns.
+ * A form builder widget for rendering the form attributes using [[ActiveForm]]. The widget uses Bootstrap 3.x styling
+ * for generating form styles and multiple field columns.
  *
- * Usage:
- * ```
- *   use kartik\form\ActiveForm;
- *   use kartik\builder\Form;
- *   $form = ActiveForm::begin($options); // $options is array for your form config
- *   echo Form::widget([
- *       'model' => $model, // your model
- *       'form' => $form,
- *       'columns' => 2,
- *       'attributes' => [
- *           'username' => ['type' => Form::INPUT_TEXT, 'options'=> ['placeholder'=>'Enter username...']],
- *           'password' => ['type' => Form::INPUT_PASSWORD],
- *           'rememberMe' => ['type' => Form::INPUT_CHECKBOX, 'enclosedByLabel' => true],
- *       ]
- *   ]);
- *   ActiveForm::end();
- * ```
+ * Usage example:
  *
+ * ~~~
+ * use kartik\form\ActiveForm;
+ * use kartik\builder\Form;
+ * $form = ActiveForm::begin($options); // $options will be your form config array params.
+ * echo Form::widget([
+ *     'model' => $model, // your model
+ *     'form' => $form,
+ *     'columns' => 2,
+ *     'attributes' => [
+ *         'username' => ['type' => Form::INPUT_TEXT, 'options'=> ['placeholder'=>'Enter username...']],
+ *         'password' => ['type' => Form::INPUT_PASSWORD],
+ *         'rememberMe' => ['type' => Form::INPUT_CHECKBOX, 'enclosedByLabel' => true],
+ *     ]
+ * ]);
+ * ActiveForm::end();
+ * ~~~
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since  1.0
  */
 class Form extends BaseForm
 {
-    // bootstrap grid column sizes
+    /**
+     * Large size for the grid column (bootstrap styled).
+     */
     const SIZE_LARGE = 'lg';
+    /**
+     * Medium size for the grid column (bootstrap styled).
+     */
     const SIZE_MEDIUM = 'md';
+    /**
+     * Small size for the grid column (bootstrap styled).
+     */
     const SIZE_SMALL = 'sm';
+    /**
+     * Extra small (tiny) size for the grid column (bootstrap styled).
+     */
     const SIZE_TINY = 'xs';
-
-    // bootstrap maximum grid width
+    /**
+     * Maximum bootstrap grid width (layout columns count).
+     */
     const GRID_WIDTH = 12;
-
-    // Form events
+    /**
+     * [[ActiveFormEvent]] triggered before parsing input.
+     */
     const EVENT_BEFORE_PARSE_INPUT = "eBeforeParseInput";
+    /**
+     * [[ActiveFormEvent]] triggered after parsing input.
+     */
     const EVENT_AFTER_PARSE_INPUT = "eAfterParseInput";
+    /**
+     * [[ActiveFormEvent]] triggered before rendering sub attribute.
+     */
     const EVENT_BEFORE_RENDER_SUB_ATTR = "eBeforeRenderSubAttr";
+    /**
+     * [[ActiveFormEvent]] triggered after rendering sub attribute.
+     */
     const EVENT_AFTER_RENDER_SUB_ATTR = "eAfterRenderSubAttr";
 
     /**
-     * @var yii\db\ActiveRecord | yii\base\Model the model used for the form
+     * @var Model the data model used for the form.
      */
     public $model;
-    
+
     /**
-     * @var string, content to display before the generated form fields.
-     * This is not HTML encoded.
+     * @var string content to display before the generated form fields. This is not HTML encoded.
      */
     public $contentBefore = '';
-    
+
     /**
-     * @var string, content to display after the generated form fields.
-     * This is not HTML encoded.
+     * @var string content to display after the generated form fields. This is not HTML encoded.
      */
     public $contentAfter = '';
 
     /**
-     * @var integer, the number of columns in which to split the fields horizontally. If not set, defaults to 1 column.
+     * @var integer the number of columns in which to split the fields horizontally. If not set, defaults to 1 column.
      */
     public $columns = 1;
 
     /**
-     * @var boolean, calculate the number of columns automatically based on count of attributes
-     * configured in the Form widget. Columns will be created max upto the Form::GRID_WIDTH.
+     * @var boolean calculate the number of columns automatically based on count of attributes configured in the
+     * [[Form]] widget. Columns will be created maximum upto the [[GRID_WIDTH]].
      */
     public $autoGenerateColumns = false;
 
     /**
-     * @var string, the bootstrap device size for rendering each grid column. Defaults to `SIZE_SMALL`.
+     * @var string the bootstrap device size for rendering each grid column. Defaults to [[SIZE_SMALL]].
      */
     public $columnSize = self::SIZE_SMALL;
 
     /**
-     * @var array the HTML attributes for the grid columns. Applicable only if `$columns` is greater than 1.
+     * @var array the HTML attributes for the grid columns. Applicable only if [[columns]] is greater than `1`.
      */
     public $columnOptions = [];
 
     /**
-     * @var array the HTML attributes for the rows. Applicable only if `$columns` is greater than 1.
+     * @var array the HTML attributes for the rows. Applicable only if [[columns]] is greater than `1`.
      */
     public $rowOptions = [];
 
     /**
      * @var array the HTML attributes for the field/attributes container. The following options are additionally
-     *     recognized:
-     * - `tag`: the HTML tag for the container. Defaults to `fieldset`.
+     * recognized:
+     * - `tag`: _string_, the HTML tag for the container. Defaults to `fieldset`.
      */
     public $options = [];
 
     /**
-     * @var string the tag for the fieldset
+     * @var string the tag for the fieldset.
      */
     private $_tag;
 
     /**
-     * @var string the form orientation
+     * @var string the form orientation.
      */
     private $_orientation = ActiveForm::TYPE_VERTICAL;
 
     /**
-     * Initializes the widget
-     *
-     * @throws \yii\base\InvalidConfigException
+     * @inheritdoc
+     * @throws InvalidConfigException
      */
     public function init()
     {
@@ -178,7 +198,7 @@ class Form extends BaseForm
     }
 
     /**
-     * Renders the field set
+     * Renders the field set.
      *
      * @return string
      */
@@ -215,7 +235,7 @@ class Form extends BaseForm
                 $content .= "\t" . $this->beginTag('div', $colOptions, $skip) . "\n";
                 if (!empty($settings['attributes'])) {
                     $this->raise(self::EVENT_BEFORE_RENDER_SUB_ATTR, $attribute, $index, ['settings' => &$settings]);
-                    $content .= $this->renderSubAttributes($attribute, $settings, $index);
+                    $content .= $this->renderSubAttributes($settings, $index);
                     $this->raise(self::EVENT_AFTER_RENDER_SUB_ATTR, $attribute, $index, ['content' => &$content]);
                 } else {
                     $this->raise(self::EVENT_BEFORE_PARSE_INPUT, $attribute, $index, ['settings' => &$settings]);
@@ -231,13 +251,16 @@ class Form extends BaseForm
     }
 
     /**
-     * Render sub attributes
+     * Render sub attributes.
+     *
+     * @param array  $settings the attribute settings
+     * @param string $index the zero-based index of the attribute
      *
      * @return string
      */
-    protected function renderSubAttributes($attribute, $settings, $index)
+    protected function renderSubAttributes($settings, $index)
     {
-        $content = $this->getSubAttributesContent($attribute, $settings, $index);
+        $content = $this->getSubAttributesContent($settings, $index);
         $labelOptions = ArrayHelper::getValue($settings, 'labelOptions', []);
         $label = ArrayHelper::getValue($settings, 'label', '');
         if ($this->_orientation === ActiveForm::TYPE_INLINE) {
@@ -251,10 +274,8 @@ class Form extends BaseForm
             $content . "\n" .
             '</div>';
         }
-        if (isset($this->form->formConfig['labelSpan'])) {
-            $defaultLabelSpan = $this->form->formConfig['labelSpan'];
-        }
-        $labelSpan = ArrayHelper::getValue($settings, 'labelSpan', 3);
+        $defaultLabelSpan = ArrayHelper::getValue($this->form->formConfig, 'labelSpan', 3);
+        $labelSpan = ArrayHelper::getValue($settings, 'labelSpan', $defaultLabelSpan);
         Html::addCssClass($labelOptions, "col-{$this->columnSize}-{$labelSpan} control-label");
         $inputSpan = self::GRID_WIDTH - $labelSpan;
         $rowOptions = ['class' => 'kv-nested-attribute-block form-sub-attributes form-group'];
@@ -270,11 +291,14 @@ class Form extends BaseForm
     }
 
     /**
-     * Gets sub attribute markup content
+     * Gets sub attribute markup content.
+     *
+     * @param array  $settings the attribute settings
+     * @param string $index the zero-based index of the attribute
      *
      * @return string
      */
-    protected function getSubAttributesContent($attribute, $settings, $index)
+    protected function getSubAttributesContent($settings, $index)
     {
         $subIndex = 0;
         $defaultSubColOptions = ArrayHelper::getValue($settings, 'subColumnOptions', $this->columnOptions);
@@ -297,6 +321,7 @@ class Form extends BaseForm
             $subSettings['columnOptions'] = $subColOptions;
             $subSettings['fieldConfig']['skipFormLayout'] = true;
             $content .= "\t\t" . $this->beginTag('div', $subColOptions) . "\n";
+            /** @var integer $index */
             $content .= "\t\t\t" . $this->parseInput($subAttr, $subSettings, $index * 10 + $subIndex) . "\n";
             $subIndex++;
             $content .= "\t\t" . $this->endTag('div') . "\n";
@@ -306,13 +331,13 @@ class Form extends BaseForm
     }
 
     /**
-     * Parses the input markup based on type
+     * Parses the input markup based on type.
      *
-     * @param string $attribute the model attribute
-     * @param string $settings  the column settings
-     * @param int    $index     the row index
+     * @param string $attribute the model attribute.
+     * @param string $settings the column settings.
+     * @param integer $index the row index.
      *
-     * @return \kartik\form\ActiveField|mixed
+     * @return string the generated input.
      * @throws InvalidConfigException
      */
     protected function parseInput($attribute, $settings, $index)
@@ -338,8 +363,6 @@ class Form extends BaseForm
             } else {
                 $settings['value'] = $val;
             }
-        } else {
-            $val = ArrayHelper::getValue($settings, 'value', null);
         }
         $val = ArrayHelper::getValue($settings, 'value', null);
         if ($type === self::INPUT_RAW) {
@@ -365,11 +388,15 @@ class Form extends BaseForm
     }
 
     /**
-     * Begins a tag markup based on orientation
+     * Begins a tag markup based on orientation.
+     *
+     * @param string $tag the HTML tag
+     * @param array $options the HTML attributes for the tag
+     * @param boolean $skip whether to skip the tag generation
      *
      * @return string
      */
-    protected function beginTag($tag, $options, $skip = false)
+    protected function beginTag($tag, $options = [], $skip = false)
     {
         if ($this->_orientation !== ActiveForm::TYPE_INLINE && !$skip) {
             return Html::beginTag($tag, $options) . "\n";
@@ -378,7 +405,10 @@ class Form extends BaseForm
     }
 
     /**
-     * Ends a tag markup based on orientation
+     * Ends a tag markup based on orientation.
+     *
+     * @param string $tag the HTML tag
+     * @param boolean $skip whether to skip the tag generation
      *
      * @return string
      */
@@ -391,12 +421,12 @@ class Form extends BaseForm
     }
 
     /**
-     * Triggers an ActiveForm event
+     * Triggers an [[ActiveFormEvent]].
      *
-     * @param string $event
-     * @param string $attribute
-     * @param string $index
-     * @param array  $data
+     * @param string $event the event name.
+     * @param string $attribute the attribute name.
+     * @param integer|string $index the row index.
+     * @param array $data the event data to pass to the event.
      */
     protected function raise($event = '', $attribute = '', $index = '', $data = [])
     {

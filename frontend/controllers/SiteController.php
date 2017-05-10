@@ -74,7 +74,6 @@ class SiteController extends Controller
     {
         $htmldom = Yii::$app->htmldom;
         $list_code = $htmldom->getCodeExcel('excel ga rung.xlsx');
-        //echo '<pre/>';var_dump($list_code);
         $htmldom->getContent($list_code);
 
 

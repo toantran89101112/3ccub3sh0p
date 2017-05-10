@@ -3,8 +3,8 @@
 /**
  * @package   yii2-krajee-base
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   1.7.7
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2017
+ * @version   1.8.8
  */
 
 namespace kartik\base;
@@ -23,77 +23,92 @@ use yii\helpers\ArrayHelper;
 class Html5Input extends InputWidget
 {
     /**
-     * @var array the special inputs which need captions
-     */
-    private static $_specialInputs = [
-        'color',
-        'range'
-    ];
-    /**
      * @var string the HTML 5 input type
      */
     public $type;
+
     /**
      * @var string the width in 'px' or '%' of the HTML5 input container
      */
     public $width;
+
     /**
      * @var array the HTML attributes for the widget container
      */
     public $containerOptions = [];
+
     /**
      * @var array the HTML attributes for the HTML-5 input.
      */
     public $html5Options = [];
+
     /**
      * @var array the HTML attributes for the HTML-5 input container
      */
     public $html5Container = [];
+
     /**
      * @var string|boolean the message shown for unsupported browser. If set to false
      * will not be displayed
      */
     public $noSupport;
+
     /**
      * @var string array the HTML attributes for container displaying unsupported browser message
      */
     public $noSupportOptions = [];
+
     /**
      * @var string one of the SIZE modifiers 'lg', 'md', 'sm', 'xs'
      */
     public $size;
+
     /**
-     * @var array the addon content
-     * - prepend: array/string the prepend addon content. If set as an array, the
-     *   following options can be set:
-     *   - content: string the prepend addon content
-     *   - asButton: boolean whether the addon is a button
-     *   - options: array the HTML attributes for the prepend addon
-     * - append: array/string the append addon content. If set as an array, the
-     *   following options can be set:
-     *   - content: string the append addon content
-     *   - asButton: boolean whether the addon is a button
-     *   - options: array the HTML attributes for the append addon
-     * - preCaption: array/string the addon content placed before the caption. If
-     *   set as an array, the following options can be set:
-     *   - content: string the append addon content
-     *   - asButton: boolean whether the addon is a button
-     *   - options: array the HTML attributes for the append addon     */
+     * @var array the addon content configuration. The following array keys can be configured:
+     *
+     * - `prepend `: _array|_string_, the prepend addon content. If set as a _string_, will be rendered raw as is without
+     *    HTML encoding. If set as an _array_, the following options can be set:
+     *   - `content `: _string_, the prepend addon content
+     *   - `asButton `: _boolean_, whether the addon is a button
+     *   - `options `: _array the HTML attributes for the prepend addon
+     * - `append `: _array_|_string_, the append addon content.If set as a _string_, will be rendered raw as is without
+     *    HTML encoding. If set as an _array_, the following options can be set:
+     *   - `content `: _string_, the append addon content
+     *   - `asButton `: _boolean_, whether the addon is a button
+     *   - `options `: _array the HTML attributes for the append addon
+     * - `preCaption `: _array_|_string_, the addon content placed before the caption.If set as a _string_, will be
+     *    rendered raw as is without HTML encoding. If set as an _array_, the following options can be set:
+     *   - `content `: _string_, the append addon content
+     *   - `asButton `: _boolean_, whether the addon is a button
+     *   - `options `: _array the HTML attributes for the append addon
+     */
     public $addon = [];
 
     /**
-     * Runs the widget
+     * @var array the list of allowed HTML input types.
      */
-    public function init()
+    private static $_allowedInputTypes = [
+        'color',
+        'range',
+        'text',
+        'hidden'
+    ];
+
+    /**
+     * @inheritdoc
+     */
+    public function run()
     {
-        parent::init();
         $this->initInput();
     }
 
+    /**
+     * Initializes the input.
+     */
     protected function initInput()
     {
         $this->initDisability($this->html5Options);
-        if (in_array($this->type, self::$_specialInputs)) {
+        if (in_array($this->type, self::$_allowedInputTypes)) {
             $this->html5Options['id'] = $this->options['id'] . '-source';
             $this->registerAssets();
             echo $this->renderInput();
@@ -107,29 +122,26 @@ class Html5Input extends InputWidget
     }
 
     /**
-     * Registers the needed assets
+     * Registers the needed assets for [[Html5Input]] widget.
      */
     public function registerAssets()
     {
         $view = $this->getView();
         Html5InputAsset::register($view);
-        $caption = 'jQuery("#' . $this->options['id'] . '")';
-        $input = 'jQuery("#' . $this->html5Options['id'] . '")';
-        $js = "{$caption}.on('change',function(){{$input}.val(this.value)});\n" .
-            "{$input}.on('input change',function(e){{$caption}.val(this.value);if(e.type=='change'){{$caption}.trigger('change');}});";
-        $view->registerJs($js);
+        $idCap = '#' . $this->options['id'];
+        $idInp = '#' . $this->html5Options['id'];
+        $this->registerWidgetJs("kvInitHtml5('{$idCap}','{$idInp}');");
     }
 
     /**
-     * Renders the special HTML5 input
-     * Mainly useful for the color and range inputs
+     * Renders the special HTML5 input. Mainly useful for the color and range inputs
      */
     protected function renderInput()
     {
         Html::addCssClass($this->options, 'form-control');
         $size = isset($this->size) ? ' input-group-' . $this->size : '';
         Html::addCssClass($this->containerOptions, 'input-group input-group-html5' . $size);
-        if (isset($this->width) && ($this->width > 0)) {
+        if (isset($this->width) && ((int)$this->width > 0)) {
             Html::addCssStyle($this->html5Container, 'width:' . $this->width);
         }
         Html::addCssClass($this->html5Container, 'input-group-addon addon-' . $this->type);
@@ -146,17 +158,20 @@ class Html5Input extends InputWidget
             $message = '';
         } else {
             $noSupport = !empty($this->noSupport) ? $this->noSupport :
-                Yii::t('app', 'It is recommended you use an upgraded browser to display the {type} control properly.',
-                    ['type' => $this->type]);
+                Yii::t(
+                    'kvbase',
+                    'It is recommended you use an upgraded browser to display the {type} control properly.',
+                    ['type' => $this->type]
+                );
             $message = "\n<br>" . Html::tag('div', $noSupport, $this->noSupportOptions);
         }
         return "<!--[if lt IE 10]>\n{$caption}{$message}\n<![endif]--><![if gt IE 9]>\n{$content}\n<![endif]>";
     }
 
     /**
-     * Parses and returns addon content
+     * Parses and returns addon content.
      *
-     * @param string /array $addon the addon parameter
+     * @param string|array $addon the addon parameter
      *
      * @return string
      */
@@ -177,8 +192,9 @@ class Html5Input extends InputWidget
     }
 
     /**
-     * Gets the HTML5 input
-     * return string
+     * Gets the HTML5 input.
+     *
+     * @return string
      */
     protected function getHtml5Input()
     {

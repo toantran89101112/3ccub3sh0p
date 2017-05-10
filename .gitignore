@@ -67,3 +67,5 @@ phpunit.phar
 /backend/web/assets
 /api/runtime
 /api/web/assets
+/frontend/runtime/debug/index.data
+/frontend/runtime/logs/app.log
