@@ -20,7 +20,7 @@ $asset = \frontend\assets\AppAsset::register($this);
         <li class="hidden-xs hidden-sm"><a href="#reviews">Đánh giá</a></li>
         <li class="hidden-xs hidden-sm"><a target="_blank" href="https://www.facebook.com/groups/634524100048245/">Facebook Group</a></li>
         <li class="hidden-xs hidden-sm"><a data-toggle="modal" data-target="#modal-contact-form" href="#">Đăng nhập</a></li>
-        <li><a href="/site/signup" class="btn btn-nav">Đăng ký sử dụng</a></li>
+        <li><a href="/frontend/web/site/signup" class="btn btn-nav">Đăng ký sử dụng</a></li>
         <li class="hidden-md hidden-lg"><a id="toggle"><i class="fa fa-bars fa-2x"></i><i class="fa fa-times fa-2x"></i></a></li>
       </ul>
     </div>

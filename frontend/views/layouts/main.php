@@ -49,11 +49,11 @@ $asset = \frontend\assets\AppAsset::register($this);
          //   echo   "<pre>"; print_r($link);       die;
             ///index
           //    
-          if(($link == '/')||($link == '/site/index')||($link == '/site')||($link == '/site/')){                   
+          if(($link == '/')||($link == '/site/index')||($link == '/site')||($link == '/site/')||($link == '/frontend/web/') ){                   
      ?>      
     <link href="<?= $asset->baseUrl ?>/template/Home/css/A.bootstrap.min.css%2bfont-awesome.min.css%2bmagnific-popup.css%2bowl.carousel.css%2bmain.css%2cMcc.xe-QRbrcBQ.css.pagespeed.cf.L7Hhsc5Z-Y.css" rel="stylesheet"/>
     <?php
-          }else if($link =='/site/signup'){                     
+          }else if(($link =='/frontend/web/site/signup') ||($link == '/site/signup')){                     
      ?>   
      <link href="<?= $asset->baseUrl ?>/template/Login/css/fontawesome/css/font-awesome.min.css" rel="stylesheet"/>
      <link href="<?= $asset->baseUrl ?>/template/Login/css/style.css" rel="stylesheet"/>
@@ -82,7 +82,7 @@ $asset = \frontend\assets\AppAsset::register($this);
 
   
      <?php        
-          if(($link == '/')||($link == '/site/index')||($link == '/site')||($link == '/site/')){                   
+             if(($link == '/')||($link == '/site/index')||($link == '/site')||($link == '/site/')||($link == '/frontend/web/') ){                    
      ?>  
         <script src="<?= $asset->baseUrl ?>/template/Home/js/jquery-2.2.1.min.js.pagespeed.jm.QwDZyK_Lba.js"></script> 
         <script src="<?= $asset->baseUrl ?>/template/Home/js/bootstrap.min.js%2bjquery.magnific-popup.min.js%2bowl.carousel.min.js%2bjquery.waypoints.min.js%2bjquery.animateNumber.min.js.pagespeed.jc.3Eraoz6Fqj.js"></script><script>eval(mod_pagespeed_nsGvxPh_mc);</script> 
@@ -100,7 +100,7 @@ $asset = \frontend\assets\AppAsset::register($this);
         <!--<script>eval(mod_pagespeed_77Uf00M4b4);</script> -->
         <script>eval(mod_pagespeed_LDb0DTF80S);</script> 
  <?php
-        }else if($link =='/site/signup'){        
+       }else if(($link =='/frontend/web/site/signup') ||($link == '/site/signup')){        
   ?>
    <canvas id="bubble-canvas" style="pointer-events: none; position: fixed; top: 0px; left: 0px; z-index: 1;" width="1304" height="286"></canvas>
     <!-- jQuery -->
