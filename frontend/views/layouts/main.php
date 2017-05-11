@@ -103,7 +103,7 @@ $asset = \frontend\assets\AppAsset::register($this);
     <script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/jquery.min.js"></script>
     <script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/jquery.form.js"></script>
     <!-- jQuery RAF (improved animation performance) -->
-  <!--  <script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/custom.js"></script>-->
+    <script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/custom.js"></script>
     <!-- jQuery RAF (improved animation performance) -->
     <script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/jquery.requestAnimationFrame.min.js"></script>
     <!-- nanoScroller -->
@@ -112,7 +112,7 @@ $asset = \frontend\assets\AppAsset::register($this);
     <!-- Sortable -->
     <script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/Sortable.min.js"></script>
     <!-- Main -->
-    <!--<script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/_con.min.js"></script>-->
+    <script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/_con.min.js"></script>
     <!-- Google Prettify -->
     <script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/prettify.js"></script>
     <script type="text/javascript" src="<?= $asset->baseUrl ?>/template/Login/js/validate/jquery.validate.min.js"></script>

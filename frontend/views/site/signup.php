@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Phần mềm quản lý vận đơn tốt nhất
                     <p>Hotline hỗ trợ 24/7: 0911.337.688 - 0947.288.115</p>
 
-                    <a href="/" class="buttom">Trang chủ</a>
+                    <a href="/frontend/web" class="buttom">Trang chủ</a>
                 </div>
             </div>
         </div>

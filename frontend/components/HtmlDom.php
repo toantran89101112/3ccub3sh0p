@@ -23,67 +23,90 @@
             else
                 return true;
         }
+        protected function getMultiCode($element) {
+
+            $code = $element->find('td',0);
+            $date_input = $element->find('td',1);
+            $status_output = $element->find('td',2);
+            $date_output = $element->find('td',3);
+            $address = $element->find('td',4);
+            $status_paypost = $element->find('td',5);
+            $date_paypost = $element->find('td',6);
+            $result = [
+                        'code'=> isset($code)?trim($code->plaintext):'',
+                        'date_input'=> isset($date_input)?trim($date_input->plaintext):'',
+                        'status_output'=> isset($status_output)?trim($status_output->plaintext):'',
+                        'date_output'=> isset($date_output)?trim($date_output->plaintext):'',
+                        'address'=> isset($address)?trim($address->plaintext):'',
+                        'status_paypost'=> isset($status_paypost)?trim($status_paypost->plaintext):'',
+                        'date_paypost'=> isset($date_paypost)?trim($date_paypost->plaintext):''
+            ];
+
+            return $result;
+
+        }
+
+        protected function getSingleCode($result) {
+            $dom = new SHD();
+            $content = $dom->str_get_html($result);
+            $data = $content->find('.main-wrapper',0);
+
+            $result = [];
+            if ($data) {
+                $code = $data->find('.tracking-header-info .package-code strong',0);
+                    $status_paypost = $data->find('.tracking-header-info .package-location strong',0);
+                    $result = [
+                            'code'=> isset($code)?trim($code->plaintext):'',
+                            'status_paypost'=> isset($status_paypost)?trim($status_paypost->plaintext):'',
+                    ];
+            }
+            return $result;
+
+        }
         public function getContent($code)
         {
             $arr_data = [];
             if ( is_array($code) ):
                 foreach($code as $key => $value):
                     $url = $this->url_vnpost . $value;
-
                     //$i = 0 ;
                     while(0==0){
                         $result = $this->request_page($url,$key);
                         $dom = new SHD();
                         $content = $dom->str_get_html($result);
-                        if ($this->checkOneRecord($value) == true)
+                        $isOneCode = $this->checkOneRecord($value);
+                        if ($isOneCode == true)
                             $data = $content->find($this->selector_vnpost_onerecord);
                         else
                             $data = $content->find($this->selector_vnpost);
 
                         if ($data) {
                             foreach($data as $element) {
-                                if ( $element->find('td') != null ) {
-                                    if ($this->checkOneRecord($value) == true)
-                                    {
-                                        print_r($element->innertext);    
-                                    }
-                                    else
-                                    {
-                                        $arr_data[] = [
-                                            'code'=> trim($element->find('td',0)->plaintext),
-                                            'date_input'=> trim($element->find('td',1)->plaintext),
-                                            'status_output'=> trim($element->find('td',2)->plaintext),
-                                            'date_output'=> trim($element->find('td',3)->plaintext),
-                                            'adress'=> trim($element->find('td',4)->plaintext),
-                                            'status_paypost'=> trim($element->find('td',5)->plaintext),
-                                            'date_paypost'=> trim($element->find('td',6)->plaintext)
-                                        ];   
-                                    }
-
-
-
+                                if ($isOneCode != true) {
+                                    if ( $element->find('td') != null )
+                                        $arr_data[] = $this->getMultiCode($element);
                                 }
-
+                                else {
+                                     $arr_data[] = $this->getSingleCode($result);
+                                     break;
+                                }
                             }
                             break;
                         }   
-
-
                         //$i++;   
-                    }
-
-
+                    } // end while
                     endforeach;
+                else: 
+                    $url = $this->url_vnpost . $code;
+                    while(0==0) {
+                         $result = $this->request_page($url);
+                         $data = $this->getSingleCode($result);
+                         if (!empty($data)) {
+                            $arr_data[] = $data;
+                            break;
+                         }
+                    }
                 endif;
-            /*else {
-            $data = $content->find($this->selector_single_vnpost['status_paypost'],0);
-            $arr_data[] = [
-            'code'=>isset($data->plaintext)?$data->plaintext:''
-            ];
-            }*/
-            /*echo '<pre/>';var_dump($arr_data);
-            die; */
-
             return $arr_data;
         }
 
@@ -100,7 +123,7 @@
                 $total = count($sheetData);
                 $tmp_key = 1;
                 foreach($sheetData as $key => $obj) {
-
+                    
                     if (empty($obj['A'])) {
                         $total--;
                         continue;
@@ -124,8 +147,9 @@
                     if ($total%5!=0 && $key == $total)
                         $arr_listcode[] = $list_code;
                 }
+                if (empty($arr_listcode) && !empty($list_code))
+                    $arr_listcode[] = $list_code;
             }
-            //echo '<pre/>';var_dump($arr_listcode);die;
             return $arr_listcode;
         }
         protected function request_page($url,$prefix_cookie = '') {
