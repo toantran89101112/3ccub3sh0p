@@ -3,7 +3,7 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=eccubeapi',
+            'dsn' => 'mysql:host=localhost;dbname=tracuunhanh',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',

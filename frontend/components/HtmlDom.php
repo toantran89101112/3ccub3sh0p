@@ -81,8 +81,8 @@
             'code'=>isset($data->plaintext)?$data->plaintext:''
             ];
             }*/
-            echo '<pre/>';var_dump($arr_data);
-            die;
+            /*echo '<pre/>';var_dump($arr_data);
+            die; */
 
             return $arr_data;
         }
