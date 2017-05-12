@@ -66,7 +66,6 @@
                     
                     $list_code = $htmldom->getCodeExcel($file_excel);
                     $arr_result = $htmldom->getContent($list_code);
-                    
                     $present = Yii::$app->user->identity->id;
                     foreach($arr_result as $result)
                     {
@@ -77,7 +76,7 @@
                         $model_->bill_number = $result['code'];
                         $model_->user_id = $present;
                         //$model->receiver = $result['receiver'];
-                        $model_->receiver_adress = $result['adress'];
+                        $model_->receiver_adress = $result['address'];
                         //$model->receiver_phone = $result['receiver_phone'];
                         //$model->bill_money = $result['bill_money'];
                         if($model_->save())
