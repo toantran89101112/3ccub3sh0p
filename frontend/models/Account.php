@@ -62,19 +62,19 @@
                 [['status'], 'integer'],
                 [['adress'], 'string', 'max' => 255],
                 [['username'], 'string', 'max' => 255],        
-                [['email', 'password', 'salt'], 'string', 'max' => 100],
+                [['email'], 'string', 'max' => 100],
                 [['displayname'], 'string', 'max' => 200],
                 ['phone', 'match', 'pattern' => '/^[0-9]\w*$/i'],
                 ['phone', 'filter', 'filter' => 'trim'],
             /*    ['phone', 'required', 'message' => Yii::t('app', '{attribute} không được để trống')],*/
-                ['phone', 'unique', 'targetClass' => '\app\models\Account', 'message' => Yii::t('app', '{attribute} đã tồn tại trong hệ thống')],
+             //   ['phone', 'unique', 'targetClass' => '\app\models\Account', 'message' => Yii::t('app', '{attribute} đã tồn tại trong hệ thống')],
                 ['phone', 'string', 'min' => 10, 'tooShort' => Yii::t('app', '{attribute} không được ngắn hơn {min} kí tự')],
                 ['phone', 'string', 'max' => 14, 'tooLong' => Yii::t('app', '{attribute} không được dài hơn {max} kí tự')],
                 ['email', 'filter', 'filter' => 'trim'],
                 ['email', 'required', 'message' => Yii::t('app', '{attribute} không được để trống')],
                 ['email', 'email', 'message' => Yii::t('app', 'Định dạng {attribute} chưa đúng, vui lòng kiểm tra lại')],
                 ['email', 'string', 'max' => 100, 'tooLong' => Yii::t('app', '{attribute} không được dài hơn {max} kí tự')],
-                ['email', 'unique', 'targetClass' => '\app\models\Account', 'message' => Yii::t('app', '{attribute} đã tồn tại trong hệ thống')],
+             //   ['email', 'unique', 'targetClass' => '\app\models\Account', 'message' => Yii::t('app', '{attribute} đã tồn tại trong hệ thống')],
                 ['displayname', 'filter', 'filter' => 'trim'],
                /* ['fullname', 'required', 'message' => Yii::t('app', '{attribute} không được để trống')],*/
                 ['displayname', 'string', 'max' => 32, 'tooLong' => Yii::t('app', '{attribute} phải nhỏ hơn {max} kí ')],
@@ -112,7 +112,52 @@
             ];
         }
 
-        public function getAuthKey() {
+        
+         public static function findIdentity($id) {
+            return static::findOne(['id' => $id]);
+        }
+         public static function findIdentityByAccessToken($token, $type = null) {
+            //return static::findOne(['access_token' => $token]);
+        }
+        public function getId() {
+           // return $this->id_user;
+        }
+         public function getAuthKey() {
+           // return $this->salt;
+        }
+         public function validateAuthKey($salt) {
+           // return $this->getAuthKey() === $salt;
+        }
+
+       public function beforeSave($insert) {
+             //   die('hai`');
+              
+                if (parent::beforeSave($insert)) {
+                 
+                    if ($this->isNewRecord) {                              
+                        $this->password_hash = $this->hashPassword($this->password_hash);
+                        $this->created_at = new Expression('NOW()');
+                        $this->status = 1;
+                                                         
+                    } else {
+                        if ($this->password_hash != $this->oldAttributes['password_hash'])
+                            $this->password_hash = $this->password_hash != '' ? $this->hashPassword($this->password_hash) : $this->oldAttributes['password'];
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            
+         private function hashPassword($password) {
+            //return sha1($password . $this->getAuthKey() . Setting::get('password_salt'));
+            return sha1($password . $this->getAuthKey() . 'GeTG6HWrVL9JIdbFNSu46HrjbyczrHNs');
+        }
+
+        public function validatePassword($password) {
+            return $this->password_hash === $this->hashPassword($password);
+        }   
+    /*    public function getAuthKey() {
             return $this->salt;
         }
 
@@ -148,28 +193,7 @@
             return static::findOne(['email' => $email]);
         }
 
-        public function beforeSave($insert) {
-            die('hai`');
-            if (parent::beforeSave($insert)) {
-                if ($this->isNewRecord) {
-                    $this->salt = $this->generateAuthKey();
-                    $this->password = $this->hashPassword($this->password);
-                    $this->register_date = new Expression('NOW()');
-                    $this->status = 1;
-                    $this->delete_flag = 1;
-                    $this->total_product = 0;
-                    $this->update_date = new Expression('NOW()');
-        
-                } else {
-                    if ($this->password != $this->oldAttributes['password'])
-                        $this->password = $this->password != '' ? $this->hashPassword($this->password) : $this->oldAttributes['password'];
-                }
-                return true;
-            } else {
-                return false;
-            }
-        }
-
+    
         
         public function Sendmail($to,$subject,$html,$from = 'info@deptraiphaitheclub.com'){
             Yii::$app->mailer->compose()
@@ -187,5 +211,5 @@
             return $this->hasMany(OxyUsersWinner::className(), ['user_id' => 'id_user']);
         }
         
-        
+        */
     }

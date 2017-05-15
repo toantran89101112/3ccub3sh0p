@@ -111,11 +111,9 @@
             ->send();
         }
         public function actionCreate(){
-   
-            
-        
-          /*  if (!yii::$app->account->isGuest)
-                $this->goHome();*/
+
+            if (!yii::$app->account->isGuest)
+                $this->goHome();
             $model = new Account();
             if ($model->load(Yii::$app->request->post())) {
              
@@ -124,10 +122,16 @@
                      //echo "<pre>";
                      //print_r(Yii::$app->request->post());die;
                      $data_all =  Yii::$app->request->post();     
-                      echo   "<pre>"; print_r($data_all);       die;                
+                  //    echo   "<pre>"; print_r($data_all);       die;                
                    
                     if($model->save()){    
-                   die("co save");
+                   die("co save"); 
+                    $find_save = Account:: find()->where(['id'=>$data_all['data_img']])->one();
+                        
+                                $find_save->user_id = $model->id_user;                           
+                                if($find_save->save()) 
+                                   Yii::$app->account->login($model, Setting::get('auth_time') ?: null );
+                            return   'uploadsuccess';
                         //$this->flash('success', Yii::t('app', 'Chuc mung ban da dang ky thanh cong'));
                      /*   if(!empty($data_all['data_img']))
                         {
