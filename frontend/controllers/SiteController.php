@@ -7,7 +7,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+ use frontend\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -77,7 +77,7 @@ class SiteController extends Controller
      //   $list_code = $htmldom->getCodeExcel('excel ga rung.xlsx');
     //    $htmldom->getContent($list_code);
 
-         $model = new Account();
+        $model = new LoginForm();
      //   die;
       //  return $this->render('index');
          return $this->render('index', ['model' => $model]);
@@ -157,7 +157,6 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-      
         $model = new Account();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {

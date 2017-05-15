@@ -23,8 +23,21 @@ $asset = \frontend\assets\AppAsset::register($this);
         <li class="hidden-xs hidden-sm"><a href="#introduce">Giới thiệu</a></li>
         <li class="hidden-xs hidden-sm"><a href="#reviews">Đánh giá</a></li>
         <li class="hidden-xs hidden-sm"><a target="_blank" href="https://www.facebook.com/groups/634524100048245/">Facebook Group</a></li>
+        <?php
+      
+               if(yii::$app->user->isGuest){
+         ?>
         <li class="hidden-xs hidden-sm"><a data-toggle="modal" data-target="#modal-contact-form" href="#">Đăng nhập</a></li>
-        <li><a href="/frontend/web/site/signup" class="btn btn-nav">Đăng ký sử dụng</a></li>
+         <li><a href="/frontend/web/site/signup" class="btn btn-nav">Đăng ký sử dụng</a></li>
+        <?php
+               }else{
+         ?>
+         <li class="hidden-xs hidden-sm"><a  href="/frontend/web/account/logout">Đăng xuất</a></li>
+          <li><a href="#" class="btn btn-nav"><?= yii::$app->user->identity->username  ?> </a></li>
+         <?php
+               }
+          ?>
+    
         <li class="hidden-md hidden-lg"><a id="toggle"><i class="fa fa-bars fa-2x"></i><i class="fa fa-times fa-2x"></i></a></li>
       </ul>
     </div>
@@ -278,7 +291,7 @@ $asset = \frontend\assets\AppAsset::register($this);
           <!--<form class="cta-form cta-light" action="http://vnpost.me/php/contact.php" method="post">-->
            <?php $form = ActiveForm::begin([
                    'action' => Url::to(['account/login']),            
-                    'options' => ['class' => 'login_form','style'=>'max-width:25%'],
+                    'options' => ['class' => 'login_form','style'=>'max-width:100%'],
                     'fieldConfig' => [
                         'template' => "<div class='row'>{label}{input}{error}</div>"
                     ]
@@ -292,7 +305,7 @@ $asset = \frontend\assets\AppAsset::register($this);
                     'template' => "<div >{label}{input}{error}</div>"
                 ])->passwordInput() ?>  
             </div>          
-              <?=Html::submitInput(Yii::t('app', 'Đăng Ký'), ['class'=>'btn btn-info', 'id' => 'btnReg']) ?>
+              <?=Html::submitInput(Yii::t('app', 'Đăng Nhập'), ['class'=>'btn btn-info', 'id' => 'btnReg']) ?>
              <?php ActiveForm::end(); ?>
           <!--</form>-->
         </div>

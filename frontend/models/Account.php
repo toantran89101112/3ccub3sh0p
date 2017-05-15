@@ -61,7 +61,8 @@
                 [['created_at', 'updated_at'], 'safe'],
                 [['status'], 'integer'],
                 [['adress'], 'string', 'max' => 255],
-                [['username'], 'string', 'max' => 255],        
+                [['username'], 'string', 'max' => 255], 
+                ['username', 'required', 'message' => Yii::t('app', '{attribute} không được để trống')],       
                 [['email'], 'string', 'max' => 100],
                 [['displayname'], 'string', 'max' => 200],
                 ['phone', 'match', 'pattern' => '/^[0-9]\w*$/i'],
@@ -119,8 +120,8 @@
          public static function findIdentityByAccessToken($token, $type = null) {
             //return static::findOne(['access_token' => $token]);
         }
-        public function getId() {
-           // return $this->id_user;
+        public function getId() {         
+            return $this->id;
         }
          public function getAuthKey() {
            // return $this->salt;
@@ -130,8 +131,7 @@
         }
 
        public function beforeSave($insert) {
-             //   die('hai`');
-              
+      
                 if (parent::beforeSave($insert)) {
                  
                     if ($this->isNewRecord) {                              
@@ -141,7 +141,7 @@
                                                          
                     } else {
                         if ($this->password_hash != $this->oldAttributes['password_hash'])
-                            $this->password_hash = $this->password_hash != '' ? $this->hashPassword($this->password_hash) : $this->oldAttributes['password'];
+                            $this->password_hash = $this->password_hash != '' ? $this->hashPassword($this->password_hash) : $this->oldAttributes['password_hash'];
                     }
                     return true;
                 } else {
@@ -156,7 +156,11 @@
 
         public function validatePassword($password) {
             return $this->password_hash === $this->hashPassword($password);
-        }   
+        }  
+          public static function findByEmail($email) {
+            return static::findOne(['email' => $email]);
+        }
+ 
     /*    public function getAuthKey() {
             return $this->salt;
         }

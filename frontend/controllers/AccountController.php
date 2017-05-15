@@ -3,7 +3,7 @@
     namespace frontend\controllers;
 
     //use app\models\SignupForm;
-    use app\models\LoginForm;
+    use frontend\models\LoginForm;
     use app\models\ForgotPassForm;
     use Yii;
     use yii\web\Controller;
@@ -20,14 +20,8 @@
 
     class AccountController extends Controller {
 
-        /*$data_post = Yii::$app->request->post();
-        $checkuser = $model->find()->where(['email'=>$data_post['Account']['email'], 'fbid' => $data_post['Account']['fbid']])->one();
-        if (!empty($checkuser)){
-        $model->login();
-        return $this->redirect(['site/index']);
-        }
-        var_dump(Yii::$app->request->post());die;*/ 
-        private $passwordsocial = '!@#oxysocial321';
+    
+      //  private $passwordsocial = '!@#oxysocial321';
         public function actionLoginfb(){
 
             $data_post = Yii::$app->request->post();
@@ -111,69 +105,40 @@
             ->send();
         }
         public function actionCreate(){
-
-            if (!yii::$app->account->isGuest)
+           
+            if (!yii::$app->user->isGuest)
                 $this->goHome();
             $model = new Account();
-            if ($model->load(Yii::$app->request->post())) {
-             
-             //   if(Yii::$app->request->isAjax){
-
-                     //echo "<pre>";
-                     //print_r(Yii::$app->request->post());die;
-                     $data_all =  Yii::$app->request->post();     
-                  //    echo   "<pre>"; print_r($data_all);       die;                
-                   
+            if ($model->load(Yii::$app->request->post())) {           
+                     $data_all =  Yii::$app->request->post();                    
                     if($model->save()){    
-                   die("co save"); 
-                    $find_save = Account:: find()->where(['id'=>$data_all['data_img']])->one();
-                        
-                                $find_save->user_id = $model->id_user;                           
-                                if($find_save->save()) 
-                                   Yii::$app->account->login($model, Setting::get('auth_time') ?: null );
-                            return   'uploadsuccess';
-                        //$this->flash('success', Yii::t('app', 'Chuc mung ban da dang ky thanh cong'));
-                     /*   if(!empty($data_all['data_img']))
-                        {
-                                $find_save = OxyUsersEvents:: find()->where(['id'=>$data_all['data_img']])->one();
-                            
-                                $find_save->user_id = $model->id_user;                           
-                                if($find_save->save()) 
-                                   Yii::$app->account->login($model, Setting::get('auth_time') ?: null );
-                            return   'uploadsuccess';
-                        }
-                        else
-                          //   return "loginsuccess";
-                            Yii::$app->account->login($model, Setting::get('auth_time') ?: null );
-                      return "loginsuccess";*/
-
+                       //      echo   "<pre>"; print_r(yii::$app->user->isGuest);       die;  
+                       $find_save = Account::findOne(['username' =>$data_all['Account']['username'] ]);
+                   //   $find_save = Account:: find()->where(['id'=>$data_all['data_img']])->one();
+                                           
+                        Yii::$app->user->login($find_save, 86400 ?: null );           
+                        return $this->redirect(['site/index']);
+                 
                     }else{   
-                         die("ko save");
+                       echo   "<pre>"; print_r($model->getErrors());       die;  
                        return  json_encode($model->getErrors());
-                        // return  $model->getErrors();
-                        //     return ActiveForm::validate($model);
-                    }
-            //    }
-
+                    }   
             }
             else {
-                      die("ko posst");
+                   //   die("ko posst");
                  return $this->redirect(['site/signup']);
              //   return $this->render('create', ['model' => $model]);
             }
         }
-        public function actionLogout(){
-            yii::$app->account->logout();
+        public function actionLogout(){      
+            yii::$app->user->logout();
             $this->goHome();
         }
         public function actionLogin()
-        {
-            die('login');
-            $request = yii::$app->request;
-
-
+        {    
+            $request = yii::$app->request->post();
             $model = new LoginForm();
-            if($request->isAjax){
+          
                 /*
                 if(isset($_COOKIE["remember_login_name"])) {                  
                 $model->email = $_COOKIE["remember_login_name"];
@@ -183,9 +148,16 @@
                 //if (!yii::$app->account->isGuest)
                 //    $this->goHome();
 
-                $id_user_need = ($request->post()['data_img']);
+           //     $id_user_need = ($request->post()['data_img']);
                 if ( ($model->load(Yii::$app->request->post()))) {
-                    $checklogin = $model->login($id_user_need);
+                  
+                    $find_save = Account::findOne(['username' =>$request['LoginForm']['username'] ]);
+                      
+                         if(!empty($find_save)) 
+                            $checklogin = $model->login($find_save->id);
+                          else
+                            die('shit');
+                       echo   "<pre>"; print_r($checklogin);       die;  
                     if ($checklogin == 'gotoDetail')
                     {
                         return json_encode(['type' => 'gotoDetail', 'user_event_id' => $id_user_need]) ; 
@@ -200,7 +172,7 @@
                    return 'error';
                 }
 
-            }
+           
         }
 
         public function actionIndex() {
