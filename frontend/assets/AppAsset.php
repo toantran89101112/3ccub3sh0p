@@ -35,7 +35,7 @@ class AppAsset extends AssetBundle
        'template/Login/js/tooltipster/jquery.tooltipster.js',*/
     ];
     public $depends = [
-     //   'yii\web\YiiAsset',
-     //   'yii\bootstrap\BootstrapAsset',
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

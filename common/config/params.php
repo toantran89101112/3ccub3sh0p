@@ -3,7 +3,7 @@ return [
     'adminEmail' => 'admin@example.com',
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
-    'path_upload'=> realpath(dirname(__FILE__).'/../../').'/uploads/',
+    'path_upload'=> realpath(dirname(__FILE__).'/../../').'/dataupload/',
     'FRONTEND_LIST_UNIT'=>[
         '0'=>'VN POST',
         '1'=>'Viettel'

@@ -25,11 +25,10 @@
         public function actionCode()
         {
             $model = new Bills();
-
             if($model->load(Yii::$app->request->post()))
             {
                 /*echo "<pre>";
-                print_r();die;*/
+                print_r(Yii::$app->request->post());die;*/
                 $request = Yii::$app->request->post()['Bills'];
                 $present = Yii::$app->user->identity->id;
                 $model->bill_number = $request['bill_number'];
@@ -43,12 +42,17 @@
 
                 if($model->save())
                 {
-                    Yii::$app->session->setFlash('success', 'Success');
+                    \Yii::$app->session->setFlash('success', 'Success');
+                    return $this->render('index',['model'=>$model]);
                 }
                 else
                     $model->getErrors();
             }
-            return $this->render('code',['model'=>$model]);
+            else
+            {
+                return $this->render('code',['model'=>$model]);
+            }
+            
         }
         public function actionFile()
         {
@@ -80,7 +84,7 @@
                         //$model->receiver_phone = $result['receiver_phone'];
                         //$model->bill_money = $result['bill_money'];
                         if($model_->save())
-                        {                        
+                        {    
                         }
                         else
                         {
