@@ -54,11 +54,34 @@
             $result = [];
             if ($data) {
                 $code = $data->find('.tracking-header-info .package-code strong',0);
-                    $status_paypost = $data->find('.tracking-header-info .package-location strong',0);
-                    $result = [
-                            'code'=> isset($code)?trim($code->plaintext):'',
-                            'status_paypost'=> isset($status_paypost)?trim($status_paypost->plaintext):'',
+
+                // get list time
+                $time = $data->find('.timeline-list-item ul li');
+                $arr_time = [];
+                foreach($time as $element) {
+
+                    $arr_time[] = [
+                        'time'=>$this->cleanStr($element->find('.label-time',0)->plaintext),
+                        'note'=>$this->cleanStr(preg_replace('/(\[COD\])|(\d.*)/','',$element->find('.block-span',0)->plaintext)),
+                        'location'=>$this->cleanStr($element->find('.block-span span',0)->plaintext),
                     ];
+                }
+
+                $date_input = $data->find('.timeline-list-item ul li',1)->find('.label-time',0);
+                $status_output = $data->find('.tracking-header-info .package-location strong',0);
+                $date_output = $data->find('.table-done tbody tr',1)->find('td',0);
+                $address = $data->find('.table-done tbody tr',1)->find('td',1);
+
+                $result = [
+                        'code'=> isset($code)?trim($code->plaintext):'',
+                        'date_input'=> isset($date_input)?trim($date_input->plaintext):'',
+                        'status_output'=> isset($status_output)?trim($status_output->plaintext):'',
+                        'date_output'=> isset($date_output)?$this->cleanStr($date_output):'',
+                        'address'=> isset($address)?trim($address->plaintext):'',
+                        'status_paypost'=> $arr_time[0]['note'],
+                        'date_paypost'=> $arr_time[0]['time'],
+                        'list_time'=>json_encode($arr_time)
+                ];
             }
             return $result;
 
@@ -107,6 +130,7 @@
                          }
                     }
                 endif;
+
             return $arr_data;
         }
 
@@ -184,6 +208,12 @@
 
             curl_close($ch);
             return $buf2;
+        }
+
+        protected function cleanStr($string) {
+            $string = html_entity_decode($string);
+            $string = preg_replace('/\s{2,}/', '', $string);
+            return trim($string);
         }
 
     }

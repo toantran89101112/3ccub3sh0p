@@ -1,9 +1,13 @@
 <?php
 
 /* @var $this yii\web\View */
+use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
 $this->title = 'VNPOST.ME - Phần mềm quản lý Vận Đơn PRO';
 $asset = \frontend\assets\AppAsset::register($this);
+
 ?>
 
 <!--hero section-->
@@ -19,8 +23,21 @@ $asset = \frontend\assets\AppAsset::register($this);
         <li class="hidden-xs hidden-sm"><a href="#introduce">Giới thiệu</a></li>
         <li class="hidden-xs hidden-sm"><a href="#reviews">Đánh giá</a></li>
         <li class="hidden-xs hidden-sm"><a target="_blank" href="https://www.facebook.com/groups/634524100048245/">Facebook Group</a></li>
+        <?php
+      
+               if(yii::$app->user->isGuest){
+         ?>
         <li class="hidden-xs hidden-sm"><a data-toggle="modal" data-target="#modal-contact-form" href="#">Đăng nhập</a></li>
-        <li><a href="/frontend/web/site/signup" class="btn btn-nav">Đăng ký sử dụng</a></li>
+         <li><a href="/frontend/web/site/signup" class="btn btn-nav">Đăng ký sử dụng</a></li>
+        <?php
+               }else{
+         ?>
+         <li class="hidden-xs hidden-sm"><a  href="/frontend/web/account/logout">Đăng xuất</a></li>
+          <li><a href="#" class="btn btn-nav"><?= yii::$app->user->identity->username  ?> </a></li>
+         <?php
+               }
+          ?>
+    
         <li class="hidden-md hidden-lg"><a id="toggle"><i class="fa fa-bars fa-2x"></i><i class="fa fa-times fa-2x"></i></a></li>
       </ul>
     </div>
@@ -269,15 +286,28 @@ $asset = \frontend\assets\AppAsset::register($this);
         
         <div class="contact-form text-center">
           <header class="section-header">
-            <h2>Hãy nhập vào username?</h2>
+            <h2>Hãy nhập vào username và pass?</h2>
           </header>
-          <form class="cta-form cta-light" action="http://vnpost.me/php/contact.php" method="post">
+          <!--<form class="cta-form cta-light" action="http://vnpost.me/php/contact.php" method="post">-->
+           <?php $form = ActiveForm::begin([
+                   'action' => Url::to(['account/login']),            
+                    'options' => ['class' => 'login_form','style'=>'max-width:100%'],
+                    'fieldConfig' => [
+                        'template' => "<div class='row'>{label}{input}{error}</div>"
+                    ]
+                ])
+            ?>
             <div class="form-group">
-              <input type="text" name="name" class="contact-name form-control input-lg" placeholder="Username" id="username-login">
-            </div>
-
-            <button type="submit" class="btn" id="continue-login">TIẾP THEO</button>
-          </form>
+               <?= $form->field($model, 'username',[
+                    'template' => "<div >{label}{input}{error}</div>"
+                ])->textInput() ?>
+               <?= $form->field($model, 'password_hash',[
+                    'template' => "<div >{label}{input}{error}</div>"
+                ])->passwordInput() ?>  
+            </div>          
+              <?=Html::submitInput(Yii::t('app', 'Đăng Nhập'), ['class'=>'btn btn-info', 'id' => 'btnReg']) ?>
+             <?php ActiveForm::end(); ?>
+          <!--</form>-->
         </div>
         
         <!--contact form end-->
