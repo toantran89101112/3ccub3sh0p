@@ -9,13 +9,30 @@
 
     class HtmlDom extends Component
     {
+        private $provider = '';
         private $url_vnpost = 'http://www.vnpost.vn/vi-vn/dinh-vi/buu-pham?key=';
         private $selector_vnpost = '.table-multi-tracking tbody tr';
         private $selector_vnpost_onerecord = '.table-tracking-info tbody tr';
-        private $selector_single_vnpost = [
-            'status_paypost'=>'.tracking-header-info .package-location strong',
-            ''
-        ];
+        private $url_vt = 'https://www.viettelpost.com.vn/Tracking?KEY=';
+
+        protected function setProvider($provider) {
+            $this->provider = $provider;
+        }
+
+        protected function getUrl() {
+            
+                switch ($this->provider) {
+                    case 'vnpost':
+                        return $this->url_vnpost;
+                        break;
+                    case 'viettel':
+                        return $this->url_vt;
+                    default:
+                        return $this->url_vnpost;
+                        break;
+                }
+
+        }
         protected function checkOneRecord($strData){
             if (strpos($strData, ',') !== false) {
                 return false;
@@ -46,52 +63,93 @@
 
         }
 
+
+
         protected function getSingleCode($result) {
             $dom = new SHD();
             $content = $dom->str_get_html($result);
-            $data = $content->find('.main-wrapper',0);
+            if ($this->provider == 'viettel') {
+                $data = $content->find('.trackingItem',0);
+            }
+            else
+                $data = $content->find('.main-wrapper',0);
 
             $result = [];
             if ($data) {
-                $code = $data->find('.tracking-header-info .package-code strong',0);
 
-                // get list time
-                $time = $data->find('.timeline-list-item ul li');
-                $arr_time = [];
-                foreach($time as $element) {
+                if ($this->provider == 'viettel') {
 
-                    $arr_time[] = [
-                        'time'=>$this->cleanStr($element->find('.label-time',0)->plaintext),
-                        'note'=>$this->cleanStr(preg_replace('/(\[COD\])|(\d.*)/','',$element->find('.block-span',0)->plaintext)),
-                        'location'=>$this->cleanStr($element->find('.block-span span',0)->plaintext),
+
+                    $code = $data->find('.divbgtop .divhead',0)->find('.colerblue span',0)->plaintext;
+                    $weight = $data->find('.divbgtop .divhead',1)->find('.colerblue span',0)->plaintext;
+                    $service = $data->find('.divbgtop .divhead',2)->find('.colerblue span',0)->plaintext;
+                    $status = $data->find('.divbgtop .divhead1',0)->find('.colerblue span',0)->plaintext;
+                    $list_time = [];
+                    $arr_list = $data->find('ul li');
+                    foreach($arr_list as $element) {
+                        $time = $element->find('span',0)->plaintext;
+                        $location = $element->find('span',1)->plaintext.':'.$element->find('span',2)->plaintext;
+                        
+
+                        $list_time[] = [
+                            'time'=>trim($time),
+                            'status_location'=>trim($location)
+                        ];
+                    }
+                    $result = [
+                        'code'=>$code,
+                        'weight'=>$weight,
+                        'service'=>$service,
+                        'status'=>$status,
+                        'list_time'=>json_encode($list_time)
                     ];
                 }
+                else {
+                    $code = $data->find('.tracking-header-info .package-code strong',0);
 
-                $date_input = $data->find('.timeline-list-item ul li',1)->find('.label-time',0);
-                $status_output = $data->find('.tracking-header-info .package-location strong',0);
-                $date_output = $data->find('.table-done tbody tr',1)->find('td',0);
-                $address = $data->find('.table-done tbody tr',1)->find('td',1);
+                    $weight = $data->find('.tracking-header-info .package-weight strong',0);
 
-                $result = [
-                        'code'=> isset($code)?trim($code->plaintext):'',
-                        'date_input'=> isset($date_input)?trim($date_input->plaintext):'',
-                        'status_output'=> isset($status_output)?trim($status_output->plaintext):'',
-                        'date_output'=> isset($date_output)?$this->cleanStr($date_output):'',
-                        'address'=> isset($address)?trim($address->plaintext):'',
-                        'status_paypost'=> $arr_time[0]['note'],
-                        'date_paypost'=> $arr_time[0]['time'],
-                        'list_time'=>json_encode($arr_time)
-                ];
+                    // get list time
+                    $time = $data->find('.timeline-list-item ul li');
+                    $arr_time = [];
+                    foreach($time as $element) {
+
+                        $arr_time[] = [
+                            'time'=>$this->cleanStr($element->find('.label-time',0)->plaintext),
+                            'note'=>$this->cleanStr(preg_replace('/(\[COD\])|(\d.*)/','',$element->find('.block-span',0)->plaintext)),
+                            'location'=>$this->cleanStr($element->find('.block-span span',0)->plaintext),
+                        ];
+                    }
+
+                    $date_input = $data->find('.timeline-list-item ul li',1)->find('.label-time',0);
+                    $status_output = $data->find('.tracking-header-info .package-location strong',0);
+                    $date_output = $data->find('.table-done tbody tr',1)->find('td',0);
+                    $address = $data->find('.table-done tbody tr',1)->find('td',1);
+
+                    $result = [
+                            'code'=> isset($code)?trim($code->plaintext):'',
+                            'weight'=>isset($weight)?trim($weight->plaintext):'',
+                            'date_input'=> isset($date_input)?trim($date_input->plaintext):'',
+                            'status_output'=> isset($status_output)?trim($status_output->plaintext):'',
+                            'date_output'=> isset($date_output)?$this->cleanStr($date_output):'',
+                            'address'=> isset($address)?trim($address->plaintext):'',
+                            'status_paypost'=> $arr_time[0]['note'],
+                            'date_paypost'=> $arr_time[0]['time'],
+                            'list_time'=>json_encode($arr_time)
+                    ];
+                }
             }
             return $result;
 
         }
-        public function getContent($code)
+        public function getContent($code,$provider = 'vnpost')
         {
+            
+            $this->setProvider($provider);
             $arr_data = [];
             if ( is_array($code) ):
                 foreach($code as $key => $value):
-                    $url = $this->url_vnpost . $value;
+                    $url = $this->getUrl() . $value;
                     //$i = 0 ;
                     while(0==0){
                         $result = $this->request_page($url,$key);
@@ -120,7 +178,7 @@
                     } // end while
                     endforeach;
                 else: 
-                    $url = $this->url_vnpost . $code;
+                    $url = $this->getUrl() . $code;
                     while(0==0) {
                          $result = $this->request_page($url);
                          $data = $this->getSingleCode($result);
@@ -188,8 +246,9 @@
             if ($prefix_cookie == 0){
 
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+                //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+                curl_setopt($ch,CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($ch, CURLOPT_COOKIEJAR,$cookie);
                 curl_setopt($ch, CURLOPT_COOKIEFILE,$cookie);
 

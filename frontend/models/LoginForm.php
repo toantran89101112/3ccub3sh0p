@@ -16,7 +16,7 @@ class LoginForm extends Account
 {
     //const CACHE_KEY = 'SIGNIN_TRIES';
     
-    public $email;
+    public $username;
     public $password;
     public $rememberMe = '';
      public $rememberLoginName = true;
@@ -30,11 +30,11 @@ class LoginForm extends Account
     {
         return [
             // username and password are both required
-            [['username', 'password_hash'], 'required', 'message' => Yii::t('app', '{attribute} không được để trống')],
+            [['username', 'password'], 'required', 'message' => Yii::t('app', '{attribute} không được để trống')],
            // [['username', 'password_hash'], EscapeValidator::className()],
             [['rememberMe'], 'string'],
             // password is validated by validatePassword()
-            ['password_hash', 'validatePassword'],
+            ['password', 'validatePassword'],
             
         ];
     }
@@ -49,11 +49,11 @@ class LoginForm extends Account
     
     public function validatePassword($attribute, $params)
     {
-        if (!$this->hasErrors()) {
-            $user = new Account;
-            $user = $this->getEmail();
 
-            if (!$user || !$user->validatePassword($this->password_hash)) {
+        if (!$this->hasErrors()) {
+            $user = new Account();
+            $user = $this->getEmail();//$user->find()->where(['username'=>$this->username])->orWhere(['email'=>$this->username])->one();
+            if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Tên đăng nhập hoặc Mật khẩu không đúng');
             }
         }
@@ -65,17 +65,13 @@ class LoginForm extends Account
      * @return boolean whether the user is logged in successfully
      */
     
-    public function login($id_user_need)
+    public function login()
     {
        
-      
+
             $user = $this->getEmail();
-            
-           if (!empty($id_user_need)){ 
-               $find_save = Account:: find()->where(['id'=>$id_user_need])->one();         
-               $find_save->save();
-           } 
-            
+
+  
            // return Yii::$app->account->login($user, Setting::get('auth_time') ?: null );
            if (Yii::$app->user->login($user, 86400 ?: null )){
                if (!empty($id_user_need))
@@ -97,7 +93,7 @@ class LoginForm extends Account
     protected function getEmail()
     {
         if ($this->_email === null) {
-            $this->_email = Account::findByEmail($this->email);
+            $this->_email = Account::find()->where(['username'=>$this->username])->orWhere(['email'=>$this->username])->one();
         }
         return $this->_email;
     }
